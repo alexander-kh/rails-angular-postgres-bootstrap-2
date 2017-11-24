@@ -1,0 +1,25 @@
+<article class="credit-card-info" *ngIf="credit_card_info">
+  <div class="row">
+    <div class="col-md-7">
+      <p class="h4">
+        ****-****-****-{{credit_card_info.last_four}}
+        <span class="label label-success">{{credit_card_info.type}}</span>
+      </p>
+      <p class="h5">
+        <label>Expires:</label>
+        {{credit_card_info.expiration_month}}/{{credit_card_info.expiration_year}}
+      </p>
+    </div>
+    <div class="col-md-5 text-right">
+      <a href="{{credit_card_info.link}}" class="btn btn-lg btn-default">
+        View Details...
+      </a>
+    </div>
+  </div>
+</article>
+<aside class="progress" *ngIf="!credit_card_info">
+  <div class="progress-bar progress-bar-info progress-bar-striped active"
+    role="progressbar" style="width: 100%">
+    Loading...
+  </div>
+</aside>

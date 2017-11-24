@@ -111,11 +111,10 @@ feature 'Customer Search' do
     
     customer = Customer.find_by!(email: "pat123@somewhere.net")
     within "section.customer-details" do
-      expect(page).to have_content(customer.id)
-      expect(page).to have_content(customer.first_name)
-      expect(page).to have_content(customer.last_name)
-      expect(page).to have_content(customer.email)
-      expect(page).to have_content(customer.username)
+      expect(page).to have_selector("[ng-reflect-model='#{customer.first_name}']")
+      expect(page).to have_selector("[ng-reflect-model='#{customer.last_name}']")
+      expect(page).to have_selector("[ng-reflect-model='#{customer.email}']")
+      expect(page).to have_selector("[ng-reflect-model='#{customer.username}']")
     end
   end
 end

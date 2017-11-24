@@ -29,9 +29,14 @@ describe("CustomerDetailsComponent", function() {
       var response = td.object(["json"]);
       td.when(response.json()).thenReturn({ customer: customer });
       
-      var observable = td.object(["subscribe"]);
+      var observable = td.object(["subscribe", "map"]);
+      
+      td.when(observable.map(
+        td.callback(response)
+      )).thenReturn(observable);
+      
       td.when(observable.subscribe(
-        td.callback(response),
+        td.callback(customer),
         td.matchers.isA(Function))).thenReturn();
       
       var mockHttp = td.object(["get"]);
