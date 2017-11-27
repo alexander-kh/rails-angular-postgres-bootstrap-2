@@ -6,7 +6,8 @@ var AddressComponent = Component({
   selector: "shine-address",
   inputs: [
     "address",
-    "addressType"
+    "addressType",
+    "icon"
   ],
   outputs: [
     "addressChanged"
@@ -17,6 +18,7 @@ var AddressComponent = Component({
     function() {
       this.address = null;
       this.addressType = null;
+      this.icon = "envelope";
       this.addressChanged = new EventEmitter();
     }
   ],

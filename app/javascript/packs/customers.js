@@ -16,6 +16,14 @@ import { AddressComponent         } from
 import { CreditCardComponent      } from
   "CustomerDetailsComponent/CreditCardComponent";
 import { TextFieldComponent       } from "TextFieldComponent";
+import { NameCasePipe             } from "NameCasePipe";
+
+import intl from "intl";
+import "intl/locale-data/jsonp/en.js";
+
+if (!window.Intl) {
+  window.Intl = intl;
+}
 
 var AppComponent = Component({
   selector: "shine-customers-app",
@@ -91,6 +99,7 @@ var CustomerAppModule = NgModule({
     AddressComponent,
     CreditCardComponent,
     TextFieldComponent,
+    NameCasePipe,
     AppComponent
   ],
   bootstrap:    [ AppComponent ]

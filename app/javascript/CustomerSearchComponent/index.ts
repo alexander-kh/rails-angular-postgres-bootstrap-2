@@ -3,16 +3,23 @@ import { Http      } from "@angular/http";
 import { Router    } from "@angular/router";
 import   template    from "./template.html";
 
+import { AjaxFailureHandler } from "AjaxFailureHandler";
+
 var CustomerSearchComponent = Component({
   selector: "shine-customer-search",
-  template: template
+  template: template,
+  providers: [
+    AjaxFailureHandler
+  ]
 }).Class({
   constructor: [
     Http,
     Router,
-    function(http, router) {
+    AjaxFailureHandler,
+    function(http, router, ajaxFailureHandler) {
       this.customers = null;
       this.http = http;
+      this.ajaxFailureHandler = ajaxFailureHandler;
       this.keywords = "";
       this.router = router;
     }
@@ -32,9 +39,7 @@ var CustomerSearchComponent = Component({
       function(response) {
         self.customers = response.json().customers;
       },
-      function(response) {
-        window.alert(response);
-      }
+      this.ajaxFailureHandler.handler()
     );
   }
 });

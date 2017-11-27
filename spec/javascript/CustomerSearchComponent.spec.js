@@ -1,5 +1,6 @@
 import "./SpecHelper";
 import { CustomerSearchComponent } from "CustomerSearchComponent";
+import { AjaxFailureHandler      } from "AjaxFailureHandler";
 import td from "testdouble/dist/testdouble";
 
 var component = null;
@@ -20,7 +21,7 @@ describe("CustomerSearchComponent", function() {
     var mockHttp = null;
     beforeEach(function() {
       mockHttp = td.object(["get"]);
-      component = new CustomerSearchComponent(mockHttp);
+      component = new CustomerSearchComponent(mockHttp, null, new AjaxFailureHandler());
     });
     describe("A search for 'pa', less than three characters", function() {
       it("sets the keywords to be 'pa'", function() {
@@ -65,7 +66,7 @@ describe("CustomerSearchComponent", function() {
         
         td.when(mockHttp.get("/customers.json?keywords=pat")).thenReturn(observable);
         
-        component = new CustomerSearchComponent(mockHttp);
+        component = new CustomerSearchComponent(mockHttp, null, new AjaxFailureHandler());
       });
       describe("A successful search", function() {
         it("sets the keywords to be 'pat'", function() {
@@ -89,7 +90,7 @@ describe("CustomerSearchComponent", function() {
           mockHttp = td.object(["get"]);
           td.when(mockHttp.get("/customers.json?keywords=pat")).thenReturn(observable);
           
-          component = new CustomerSearchComponent(mockHttp);
+          component = new CustomerSearchComponent(mockHttp, null, new AjaxFailureHandler());
         });
         it("sets the keywords to be 'pat'", function() {
           component.search("pat");

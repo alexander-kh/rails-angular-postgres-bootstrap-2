@@ -1,5 +1,6 @@
 import "./SpecHelper";
 import { CustomerDetailsComponent } from "CustomerDetailsComponent";
+import { AjaxFailureHandler       } from "AjaxFailureHandler";
 import td from "testdouble/dist/testdouble";
 
 var component = null;
@@ -64,7 +65,7 @@ describe("CustomerDetailsComponent", function() {
       var route = createMockRoute(customer.id);
       var http = createMockHttp(customer);
       
-      component = new CustomerDetailsComponent(route, http);
+      component = new CustomerDetailsComponent(route, http, new AjaxFailureHandler());
     });
     it("fetches the customer from the back-end", function() {
       component.ngOnInit();

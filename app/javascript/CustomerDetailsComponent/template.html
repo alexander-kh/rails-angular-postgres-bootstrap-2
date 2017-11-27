@@ -8,6 +8,7 @@
         </shine-customer-info>
         <shine-address
           addressType="Shipping"
+          icon="plane"
           bind-address="customer.shipping_address"
           on-addressChanged="saveShippingAddress($event)">
         </shine-address>
@@ -15,7 +16,10 @@
       <div class="col-md-6">
         <article class="panel panel-default">
           <header class="panel-heading">
-            <h2 class="h4">Billing Info</h2>
+            <h2 class="h4">
+              <i class="glyphicon glyphicon-credit-card" aria-hidden="true"></i>
+              Billing Info
+            </h2>
           </header>
           <section class="panel-body">
             <shine-credit-card

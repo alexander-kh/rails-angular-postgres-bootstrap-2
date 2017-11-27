@@ -1,6 +1,9 @@
 <article class="panel panel-primary customer-info" *ngIf="customer">
   <header class="panel-heading">
-    <h1 class="h3">Customer</h1>
+    <h1 class="h3">
+      <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+      Customer
+    </h1>
   </header>
   <section class="panel-body">
     <div class="row">
@@ -38,6 +41,6 @@
     </shine-text-field>
   </section>
   <footer class="panel-footer">
-    <label for="joined">Joined</label> {{customer.joined_at}}
+    <label for="joined">Joined</label> {{customer.joined_at | date}}
   </footer>
 </article>

@@ -4,26 +4,29 @@ import { Http           } from "@angular/http";
 import                         "rxjs/add/operator/map";
 import   template         from "./template.html";
 
+import { AjaxFailureHandler } from "AjaxFailureHandler";
+
 var CustomerDetailsComponent = Component({
   selector: "shine-customer-details",
-  template: template
+  template: template,
+  providers: [
+    AjaxFailureHandler
+  ]
 }).Class({
   constructor: [
     ActivatedRoute,
     Http,
-      function(activatedRoute, http) {
+    AjaxFailureHandler,
+      function(activatedRoute, http, ajaxFailureHandler) {
         this.activatedRoute = activatedRoute;
         this.http = http;
+        this.ajaxFailureHandler = ajaxFailureHandler;
         this.id = null;
         this.customer = null;
       }
   ],
   ngOnInit: function() {
     var self = this;
-    var observableFailed = function(response) {
-      alert(response);
-    }
-    
     var parseCustomer = function(response) {
       var customer = response.json().customer;
       
@@ -51,10 +54,10 @@ var CustomerDetailsComponent = Component({
       
       mappedObservable.subscribe(
         function(customer) { self.customer = customer; },
-        observableFailed
+        self.ajaxFailureHandler.handler()
       );
     }    
-    self.activatedRoute.params.subscribe(routeSuccess, observableFailed);   
+    self.activatedRoute.params.subscribe(routeSuccess, self.ajaxFailureHandler.handler());
   },
   saveCustomerField: function(field_name, value) {
     var update = {};
