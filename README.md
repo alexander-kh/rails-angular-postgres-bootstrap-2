@@ -33,7 +33,7 @@ Visit http://www.pragmaticprogrammer.com/titles/dcbang2 for more book informatio
 
   * Create user:
     ```
-    createuser --createdb --login -P shine
+    createuser --superuser --createdb --login -P shine
     ```
     password: shine
   * Create db:
