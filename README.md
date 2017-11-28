@@ -10,7 +10,8 @@ Visit http://www.pragmaticprogrammer.com/titles/dcbang2 for more book informatio
   * Ruby: 2.4.2
   * Rails: 5.1.4
   * PostgreSQL: 9.6.5
-  * Angular: 4.4.6
+  * Angular: 5.0.3
+  * TypeScript: 2.6.2
   * Bootstrap: 3.3.7
   * Node: 8.6.0
   * Yarn: 1.2.1
