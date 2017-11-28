@@ -21,58 +21,17 @@ import { NameCasePipe             } from "NameCasePipe";
 import intl from "intl";
 import "intl/locale-data/jsonp/en.js";
 
-if (!window.Intl) {
-  window.Intl = intl;
+if (!window.hasOwnProperty("Intl")) {
+  window["Intl"] = intl;
 }
 
-var AppComponent = Component({
+@Component({
   selector: "shine-customers-app",
   template: "<router-outlet></router-outlet>"
-}).Class({
-  constructor: [
-    function() {}
-  ]
-});
+})
+class AppComponent {}
 
-var RESULTS = [
-  {
-    first_name: "Pat",
-    last_name: "Smith",
-    username: "psmith",
-    email: "pat.smith@example.com",
-    created_at: "2016-02-05",
-  },
-  {
-    first_name: "Patrick",
-    last_name: "Jones",
-    username: "pjpj",
-    email: "jones.p@business.net",
-    created_at: "2014-03-05",
-  },
-  {
-    first_name: "Patricia",
-    last_name: "Benjamin",
-    username: "pattyb",
-    email: "benjie@aol.info",
-    created_at: "2016-01-02",
-  },
-  {
-    first_name: "Patty",
-    last_name: "Patrickson",
-    username: "ppat",
-    email: "pppp@freemail.computer",
-    created_at: "2016-02-05",
-  },
-  {
-    first_name: "Jane",
-    last_name: "Patrick",
-    username: "janesays",
-    email: "janep@company.net",
-    created_at: "2013-01-05",
-  },
-];
-
-var routing = RouterModule.forRoot(
+let routing = RouterModule.forRoot(
   [
     {
       path: "",
@@ -85,7 +44,7 @@ var routing = RouterModule.forRoot(
   ]
 );
 
-var CustomerAppModule = NgModule({
+@NgModule({
   imports:      [ 
     BrowserModule,
     FormsModule,
@@ -103,8 +62,7 @@ var CustomerAppModule = NgModule({
     AppComponent
   ],
   bootstrap:    [ AppComponent ]
-}).Class({
-  constructor: function() {}
-});
+})
+class CustomerAppModule {}
 
 platformBrowserDynamic().bootstrapModule(CustomerAppModule);

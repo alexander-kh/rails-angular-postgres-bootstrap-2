@@ -2,7 +2,7 @@ import { EventEmitter,
          Component } from "@angular/core";
 import   template    from "./AddressComponent.html";
 
-var AddressComponent = Component({
+@Component({
   selector: "shine-address",
   inputs: [
     "address",
@@ -13,18 +13,20 @@ var AddressComponent = Component({
     "addressChanged"
   ],
   template: template
-}).Class({
-  constructor: [
-    function() {
-      this.address = null;
-      this.addressType = null;
-      this.icon = "envelope";
-      this.addressChanged = new EventEmitter();
+})
+export class AddressComponent {
+  address: Object;
+  addressType: string;
+  icon: string;
+  addressChanged: EventEmitter<Object>;
+
+  constructor() {
+    this.address = null;
+    this.addressType = null;
+    this.icon = "envelope";
+    this.addressChanged = new EventEmitter();
     }
-  ],
-  save: function(update) {
+  save(update: Object):void {
     this.addressChanged.emit(update);
   }
-});
-
-export { AddressComponent };
+}

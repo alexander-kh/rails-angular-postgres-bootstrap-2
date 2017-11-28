@@ -5,30 +5,28 @@ import   template    from "./template.html";
 
 import { AjaxFailureHandler } from "AjaxFailureHandler";
 
-var CustomerSearchComponent = Component({
+@Component({
   selector: "shine-customer-search",
   template: template,
   providers: [
     AjaxFailureHandler
   ]
-}).Class({
-  constructor: [
-    Http,
-    Router,
-    AjaxFailureHandler,
-    function(http, router, ajaxFailureHandler) {
-      this.customers = null;
-      this.http = http;
-      this.ajaxFailureHandler = ajaxFailureHandler;
-      this.keywords = "";
-      this.router = router;
-    }
-  ],
-  viewDetails: function(customer) {
+})
+export class CustomerSearchComponent {
+  customers: Array<any>;
+  keywords: String;
+  
+  constructor(private http: Http,
+              private router: Router,
+              private ajaxFailureHandler: AjaxFailureHandler) {
+    this.customers = null;
+    this.keywords = "";
+  }
+  viewDetails(customer) {
     this.router.navigate(["/", customer.id]);
-  },
-  search: function($event) {
-    var self = this;
+  }
+  search($event) {
+    let self = this;
     self.keywords = $event;
     if (self.keywords.length < 3) {
       return;
@@ -39,9 +37,7 @@ var CustomerSearchComponent = Component({
       function(response) {
         self.customers = response.json().customers;
       },
-      this.ajaxFailureHandler.handler()
+      self.ajaxFailureHandler.handler()
     );
   }
-});
-
-export { CustomerSearchComponent };
+}

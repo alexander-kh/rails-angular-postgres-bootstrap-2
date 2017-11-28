@@ -1,11 +1,10 @@
-import { Pipe } from "@angular/core";
+import { Pipe, PipeTransform } from "@angular/core";
 
-var NameCasePipe = Pipe({
+@Pipe({
   name: "nameCase"
-}).Class({
-  constructor: function() {},
-  
-  transform: function(value) {
+})
+export class NameCasePipe implements PipeTransform {
+  transform(value: string):string {
     if (!value) { return value; }
     
     if ( (value.toLowerCase() === value) ||
@@ -18,6 +17,4 @@ var NameCasePipe = Pipe({
       return value;
     }
   }
-});
-
-export { NameCasePipe };
+}

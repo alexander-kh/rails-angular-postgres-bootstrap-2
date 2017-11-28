@@ -1,10 +1,12 @@
-import { Component } from "@angular/core";
-import { Http      } from "@angular/http";
-import   template    from "./CreditCardComponent.html";
+import { Component,
+         OnChanges,
+         SimpleChange } from "@angular/core";
+import { Http         } from "@angular/http";
+import   template       from "./CreditCardComponent.html";
 
 import { AjaxFailureHandler } from "AjaxFailureHandler";
 
-var CreditCardComponent = Component({
+@Component({
   selector: "shine-credit-card",
   inputs: [
     "cardholder_id"
@@ -13,17 +15,17 @@ var CreditCardComponent = Component({
     AjaxFailureHandler
   ],
   template: template
-}).Class({
-  constructor: [
-    Http,
-    AjaxFailureHandler,
-    function(http, ajaxFailureHandler) {
-      this.http = http;
-      this.cardholder_id = null;
-      this.ajaxFailureHandler = ajaxFailureHandler;
-    }
-  ],
-  ngOnChanges: function(changes) {
+})
+export class CreditCardComponent implements OnChanges {
+  credit_card_info: Object;
+  cardholder_id: string;
+  
+  constructor(private http: Http,
+              private ajaxFailureHandler: AjaxFailureHandler) {
+    this.cardholder_id = null;
+  }
+  
+  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
     if (changes.cardholder_id) {
       if (changes.cardholder_id.currentValue) {
         this.cardholder_id = changes.cardholder_id.currentValue;
@@ -34,8 +36,9 @@ var CreditCardComponent = Component({
         this.credit_card_info = null;
       }
     }
-  },
-  fetchCreditCardInfo: function() {
+  }
+  
+  fetchCreditCardInfo():void {
     var self = this;
     self.http.get("/credit_card_info/" + self.cardholder_id).
       subscribe(
@@ -45,6 +48,4 @@ var CreditCardComponent = Component({
         self.ajaxFailureHandler.handler()
       );
   }
-});
-
-export { CreditCardComponent };
+}

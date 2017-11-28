@@ -1,12 +1,10 @@
-import { Class } from "@angular/core";
+import { Injectable } from "@angular/core";
 
-var AjaxFailureHandler = Class({
-  constructor: function() {},
-  handler: function() {
+@Injectable()
+export class AjaxFailureHandler {
+  handler(): (any) => void {
     return function(response) {
       window.alert(response);
     };
   }
-});
-
-export { AjaxFailureHandler };
+}
