@@ -7,7 +7,7 @@ Visit http://www.pragmaticprogrammer.com/titles/dcbang2 for more book informatio
 
 **Versions used:**
 
-  * Ruby: 2.4.2
+  * Ruby: 2.5.0
   * Rails: 5.1.4
   * PostgreSQL: 9.6.5
   * Angular: 5.0.3
@@ -46,11 +46,16 @@ Visit http://www.pragmaticprogrammer.com/titles/dcbang2 for more book informatio
     bundle exec rails db:migrate
     ```
 
-  * Populate db with data (will take several hours):
+  * Populate db with data:
     ```
-    bundle exec rails db:seed
+    bundle exec rails db:seed (350 000 customers with addresses)
     ```
-
+  * Refresh `customer_details` materialized view in the test database:
+    ```
+    rails dbconsole test
+    localhost shine@shine_test=# refresh materialized view customer_details;
+    ```
+  
 * Install libraries
 
   * Ruby gems:
@@ -87,3 +92,9 @@ Visit http://www.pragmaticprogrammer.com/titles/dcbang2 for more book informatio
   ```
   foreman start
   ```
+
+  * visit `http://localhost:5000`
+  
+  * sign up with an email end in domain `example.com`
+  
+  * visit `/customers` to search for customers

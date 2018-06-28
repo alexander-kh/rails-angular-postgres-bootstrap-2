@@ -25,7 +25,7 @@ gem 'coffee-rails', '~> 4.2'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'foreman'
-gem 'devise'
+gem 'devise', '~> 4.4.3'
 gem 'faker'
 gem 'angular_rails_csrf'
 # Use Redis adapter to run Action Cable in production
